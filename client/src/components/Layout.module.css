@@ -1,0 +1,81 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+}
+
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 2.5rem;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.link:hover {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: var(--text-primary);
+}
+
+.active {
+    background-color: var(--primary);
+    color: white !important;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    color: var(--danger);
+    font-family: inherit;
+    font-size: 1rem;
+    width: 100%;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.logoutBtn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.main {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
