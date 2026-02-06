@@ -1,8 +1,11 @@
 from django.db import models
 from django.conf import settings
 
+
 class AuditLog(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True
+    )
     action = models.CharField(max_length=255)
     details = models.TextField(blank=True)
     target_model = models.CharField(max_length=100, blank=True)

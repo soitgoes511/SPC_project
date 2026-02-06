@@ -4,13 +4,14 @@ import pandas as pd
 from django.db import connection
 from .models import DataSource
 
+
 class DataSourceService:
     @staticmethod
     def get_connection_string(source: DataSource):
         if source.engine == DataSource.Engine.MSSQL:
             # Using basic ODBC Driver 17 for SQL Server or generic "SQL Server"
             # TODO: Make driver configurable if needed
-            driver = '{ODBC Driver 17 for SQL Server}' 
+            driver = "{ODBC Driver 17 for SQL Server}"
             # Fallback to local SQL Server driver if 17 not present?
             # For now try 17.
             conn_str = f"DRIVER={driver};SERVER={source.host},{source.port};DATABASE={source.database_name};UID={source.username};PWD={source.password}"
@@ -27,15 +28,15 @@ class DataSourceService:
                 conn = pyodbc.connect(conn_str, timeout=5)
                 conn.close()
             elif source.engine == DataSource.Engine.POSTGRES:
-                 conn = psycopg2.connect(
+                conn = psycopg2.connect(
                     host=source.host,
                     port=source.port,
                     database=source.database_name,
                     user=source.username,
                     password=source.password,
-                    connect_timeout=5
+                    connect_timeout=5,
                 )
-                 conn.close()
+                conn.close()
             return True, "Connection Successful"
         except Exception as e:
             return False, str(e)
@@ -48,7 +49,9 @@ class DataSourceService:
                 conn = pyodbc.connect(conn_str)
                 cursor = conn.cursor()
                 # Query to list tables in MSSQL
-                cursor.execute("SELECT TABLE_SCHEMA, TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'")
+                cursor.execute(
+                    "SELECT TABLE_SCHEMA, TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'"
+                )
                 for row in cursor.fetchall():
                     tables.append(f"{row.TABLE_SCHEMA}.{row.TABLE_NAME}")
                 conn.close()
@@ -58,10 +61,12 @@ class DataSourceService:
                     port=source.port,
                     database=source.database_name,
                     user=source.username,
-                    password=source.password
+                    password=source.password,
                 )
                 cursor = conn.cursor()
-                cursor.execute("SELECT table_schema, table_name FROM information_schema.tables WHERE table_schema='public'")
+                cursor.execute(
+                    "SELECT table_schema, table_name FROM information_schema.tables WHERE table_schema='public'"
+                )
                 for row in cursor.fetchall():
                     tables.append(f"{row[0]}.{row[1]}")
                 conn.close()
@@ -89,11 +94,11 @@ class DataSourceService:
                     port=source.port,
                     database=source.database_name,
                     user=source.username,
-                    password=source.password
+                    password=source.password,
                 )
                 df = pd.read_sql(query, conn)
                 conn.close()
                 return df
         except Exception as e:
             print(f"Error fetching data: {e}")
-            return pd.DataFrame() # Empty on error
+            return pd.DataFrame()  # Empty on error

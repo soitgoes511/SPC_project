@@ -6,43 +6,63 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('spc', '0001_initial'),
+        ("spc", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='chartconfig',
-            name='datetime_column',
-            field=models.CharField(default='', help_text='Column containing the timestamp', max_length=255),
+            model_name="chartconfig",
+            name="datetime_column",
+            field=models.CharField(
+                default="", help_text="Column containing the timestamp", max_length=255
+            ),
         ),
         migrations.AddField(
-            model_name='chartconfig',
-            name='operation_column',
-            field=models.CharField(default='Operation', help_text='Column name for Operation', max_length=255),
+            model_name="chartconfig",
+            name="operation_column",
+            field=models.CharField(
+                default="Operation",
+                help_text="Column name for Operation",
+                max_length=255,
+            ),
         ),
         migrations.AddField(
-            model_name='chartconfig',
-            name='product_column',
-            field=models.CharField(default='Product', help_text='Column name for Product', max_length=255),
+            model_name="chartconfig",
+            name="product_column",
+            field=models.CharField(
+                default="Product", help_text="Column name for Product", max_length=255
+            ),
         ),
         migrations.AddField(
-            model_name='chartconfig',
-            name='table_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="chartconfig",
+            name="table_name",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AddField(
-            model_name='chartconfig',
-            name='value_column',
-            field=models.CharField(default='', help_text='Column containing the measurement value', max_length=255),
+            model_name="chartconfig",
+            name="value_column",
+            field=models.CharField(
+                default="",
+                help_text="Column containing the measurement value",
+                max_length=255,
+            ),
         ),
         migrations.AlterField(
-            model_name='chartconfig',
-            name='operation_identifier',
-            field=models.CharField(default='', help_text='Value to filter Operation column by', max_length=255),
+            model_name="chartconfig",
+            name="operation_identifier",
+            field=models.CharField(
+                default="",
+                help_text="Value to filter Operation column by",
+                max_length=255,
+            ),
         ),
         migrations.AlterField(
-            model_name='chartconfig',
-            name='product_identifier',
-            field=models.CharField(default='', help_text='Value to filter Product column by', max_length=255),
+            model_name="chartconfig",
+            name="product_identifier",
+            field=models.CharField(
+                default="",
+                help_text="Value to filter Product column by",
+                max_length=255,
+            ),
         ),
     ]

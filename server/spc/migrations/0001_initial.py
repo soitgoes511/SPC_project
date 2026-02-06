@@ -15,38 +15,112 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='DataSource',
+            name="DataSource",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('engine', models.CharField(choices=[('MSSQL', 'Microsoft SQL Server'), ('POSTGRES', 'PostgreSQL')], default='MSSQL', max_length=20)),
-                ('host', models.CharField(max_length=255)),
-                ('port', models.IntegerField(default=1433)),
-                ('database_name', models.CharField(max_length=255)),
-                ('username', models.CharField(max_length=255)),
-                ('password', models.CharField(help_text='Stored as plain text for now', max_length=255)),
-                ('is_active', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                (
+                    "engine",
+                    models.CharField(
+                        choices=[
+                            ("MSSQL", "Microsoft SQL Server"),
+                            ("POSTGRES", "PostgreSQL"),
+                        ],
+                        default="MSSQL",
+                        max_length=20,
+                    ),
+                ),
+                ("host", models.CharField(max_length=255)),
+                ("port", models.IntegerField(default=1433)),
+                ("database_name", models.CharField(max_length=255)),
+                ("username", models.CharField(max_length=255)),
+                (
+                    "password",
+                    models.CharField(
+                        help_text="Stored as plain text for now", max_length=255
+                    ),
+                ),
+                ("is_active", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
         ),
         migrations.CreateModel(
-            name='ChartConfig',
+            name="ChartConfig",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('product_identifier', models.CharField(help_text='Value to filter Product column by', max_length=255)),
-                ('operation_identifier', models.CharField(help_text='Value to filter Operation column by', max_length=255)),
-                ('title', models.CharField(blank=True, max_length=255)),
-                ('upper_spec_limit', models.FloatField(blank=True, null=True)),
-                ('lower_spec_limit', models.FloatField(blank=True, null=True)),
-                ('target', models.FloatField(blank=True, null=True)),
-                ('aggregation_type', models.CharField(choices=[('TIME_HOUR', 'Hourly'), ('TIME_DAY', 'Daily'), ('COUNT', 'By Count')], default='TIME_HOUR', max_length=50)),
-                ('aggregation_size', models.IntegerField(default=1, help_text='e.g. 1 Hour or 30 parts')),
-                ('weco_rules', models.JSONField(default=dict, help_text='Enabled WECO rules configuration')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='charts', to=settings.AUTH_USER_MODEL)),
-                ('data_source', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='charts', to='spc.datasource')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "product_identifier",
+                    models.CharField(
+                        help_text="Value to filter Product column by", max_length=255
+                    ),
+                ),
+                (
+                    "operation_identifier",
+                    models.CharField(
+                        help_text="Value to filter Operation column by", max_length=255
+                    ),
+                ),
+                ("title", models.CharField(blank=True, max_length=255)),
+                ("upper_spec_limit", models.FloatField(blank=True, null=True)),
+                ("lower_spec_limit", models.FloatField(blank=True, null=True)),
+                ("target", models.FloatField(blank=True, null=True)),
+                (
+                    "aggregation_type",
+                    models.CharField(
+                        choices=[
+                            ("TIME_HOUR", "Hourly"),
+                            ("TIME_DAY", "Daily"),
+                            ("COUNT", "By Count"),
+                        ],
+                        default="TIME_HOUR",
+                        max_length=50,
+                    ),
+                ),
+                (
+                    "aggregation_size",
+                    models.IntegerField(default=1, help_text="e.g. 1 Hour or 30 parts"),
+                ),
+                (
+                    "weco_rules",
+                    models.JSONField(
+                        default=dict, help_text="Enabled WECO rules configuration"
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="charts",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "data_source",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="charts",
+                        to="spc.datasource",
+                    ),
+                ),
             ],
         ),
     ]
